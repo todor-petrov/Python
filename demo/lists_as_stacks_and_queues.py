@@ -1,14 +1,14 @@
-'''
-01.Reverse Numbers
+"""
+01. Reverse Numbers
 
 def reverse_numbers(numbers):
     print(' '.join(numbers[::-1]))
 
 
 reverse_numbers([x for x in input().split(' ')])
-'''
+"""
 
-'''
+"""
 02. Stacked Queries
 
 def stacked_queries():
@@ -28,5 +28,25 @@ def stacked_queries():
 
 
 stacked_queries()
-'''
+"""
 
+
+"""
+03. Fast Food
+
+from collections import deque
+
+available_quantity, orders = int(input()), deque([int(x) for x in input().split(' ')])
+not_enough_food = False
+print(max(orders))
+while orders:
+    if available_quantity >= orders[0]:
+        available_quantity -= orders.popleft()
+    else:
+        not_enough_food = True
+        break
+if not_enough_food:
+    print(f"Orders left: {' '.join(str(x) for x in orders)}")
+else:
+    print('Orders complete')
+"""
