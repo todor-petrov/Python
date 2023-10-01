@@ -8,6 +8,7 @@ def reverse_numbers(numbers):
 reverse_numbers([x for x in input().split(' ')])
 """
 
+
 """
 02. Stacked Queries
 
@@ -49,4 +50,20 @@ if not_enough_food:
     print(f"Orders left: {' '.join(str(x) for x in orders)}")
 else:
     print('Orders complete')
+"""
+
+
+"""
+04. Fashion Boutique
+
+clothes, rack_capacity = [int(x) for x in input().split(' ')], int(input())
+racks_number, current_rack_capacity = 1, rack_capacity
+while clothes:
+    if clothes[-1] <= current_rack_capacity:
+        current_rack_capacity -= clothes.pop()
+    else:
+        current_rack_capacity = rack_capacity
+        racks_number += 1
+        current_rack_capacity -= clothes.pop()
+print(racks_number)
 """
