@@ -10,6 +10,7 @@ for c in range(1, 48):
 print(correct_triples_count)
 """
 
+
 # 02. Heap's algorithm
 import sys
 
@@ -32,4 +33,17 @@ if len(sys.argv) != 2:
 word = sys.argv[1]
 
 generate_permutations(list(word), len(word) - 1)
+"""
+
+
+"""
+# 03.
+import sys, re
+
+counts = {}
+for line in sys.stdin:
+    for word in re.findall(r'[a-z\']+', line.lower()):
+        counts[word] = counts.get(word, 0) + 1
+        for word, count in sorted(counts.items()):
+            print(word, count)
 """
