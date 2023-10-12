@@ -6,16 +6,17 @@ def all_cars(dataframe):
 
 
 def unique_cars(data_frame):
-    return len(data_frame['Name'].unique())
+    return f"Number of unique cars: {len(data_frame['Name'].unique())}"
 
 
 def average_horse_power(data_frame):
-    return data_frame['Horsepower'].mean()
+    return f"Average horsepower of all cars: {data_frame['Horsepower'].mean()}"
 
 
 def most_heaviest_cars(data_frame):
     number_of_most_heaviest_cars = 5
-    return data_frame.nlargest(number_of_most_heaviest_cars, 'Weight_in_lbs', keep='first')
+    return ("Top 5 heaviest cars:\n"
+            f"{data_frame.nlargest(number_of_most_heaviest_cars, 'Weight_in_lbs', keep='first')}")
 
 
 def number_of_cars_made_by_each_manufacturer(data_frame):
