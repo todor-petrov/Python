@@ -48,15 +48,8 @@ class TestCarDataProcessor(TestCase, CarDataProcessor):
         with open(self.test_json_file, 'w') as f:
             json.dump(self.test_data, f)
 
-        # Initialize the CarDataProcessor with test data
         self.df = pd.DataFrame(self.test_data)
         self.processor = CarDataProcessor(self.test_json_file)
-
-    # def tearDown(self):
-    #     # Clean up, delete the test JSON file and CSV file
-    #     import os
-    #     os.remove(self.test_json_file)
-    #     os.remove(self.test_csv_file)
 
     def test_unique_cars_count(self):
         self.assertEqual(self.processor.unique_cars_count(), 3)
@@ -74,15 +67,14 @@ class TestCarDataProcessor(TestCase, CarDataProcessor):
         result = self.processor.cars_by_manufacturer()
         self.assertTrue(expected_result.equals(result))
 
-    # def test_cars_by_year(self):
-    #     expected = pd.Series([1, 1, 1], index=[2015, 2020, 2022])
-    #     self.assertTrue(self.test_car_processor.cars_by_year().equals(expected))
+    def test_cars_by_year(self):
+        expected_result = self.df['Year'].value_counts()
+        result = self.processor.cars_by_year()
+        self.assertTrue(expected_result.equals(result))
 
     def test_save_to_csv(self):
-        # Save the data to a test CSV file
         self.processor.save_to_csv(self.test_csv_file)
 
-        # Load the saved CSV and compare it with the original data
         df = pd.read_csv(self.test_csv_file)
         self.assertTrue(df.equals(pd.DataFrame(self.test_data)))
 
