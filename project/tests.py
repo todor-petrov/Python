@@ -1,0 +1,89 @@
+from unittest import TestCase, main
+import pandas as pd
+import json
+
+from functionality import CarDataProcessor  # Import the CarDataAnalyzer class from your code
+
+
+class TestCarDataProcessor(TestCase, CarDataProcessor):
+    def setUp(self):
+        self.test_data = [
+            {
+                "Name": "Toyota Camry",
+                "Miles_per_Gallon": 20,
+                "Cylinders": 4,
+                "Displacement": 307,
+                "Horsepower": 200,
+                "Weight_in_lbs": 3000,
+                "Acceleration": 6,
+                "Year": "2020-01-01",
+                "Origin": "Japan",
+            },
+            {
+                "Name": "Ford F-150",
+                "Miles_per_Gallon": 30,
+                "Cylinders": 8,
+                "Displacement": 400,
+                "Horsepower": 300,
+                "Weight_in_lbs": 4500,
+                "Acceleration": 10,
+                "Year": "2022-06-06",
+                "Origin": "USA",
+            },
+            {
+                "Name": "Honda Civic",
+                "Miles_per_Gallon": 40,
+                "Cylinders": 6,
+                "Displacement": 250,
+                "Horsepower": 150,
+                "Weight_in_lbs": 2700,
+                "Acceleration": 8,
+                "Year": "2015-08-20",
+                "Origin": "Japan",
+            },
+        ]
+        self.test_json_file = "test_car_data.json"
+        self.test_csv_file = "test_car_data_output.csv"
+
+        # Create a test JSON file
+        with open(self.test_json_file, "w") as f:
+            json.dump(self.test_data, f)
+
+        # Initialize the CarDataAnalyzer with test data
+        self.test_car_processor = CarDataProcessor(self.test_json_file)
+
+    # def tearDown(self):
+    #     # Clean up, delete the test JSON file and CSV file
+    #     import os
+    #     os.remove(self.test_json_file)
+    #     os.remove(self.test_csv_file)
+
+    def test_unique_cars_count(self):
+        self.assertEqual(self.test_car_processor.unique_cars_count(), 3)
+
+    def test_average_horsepower(self):
+        self.assertAlmostEqual(self.test_car_processor.average_horsepower(), 216.66666666666666, places=2)
+
+    def test_top_heaviest_cars(self):
+        expected = pd.DataFrame(self.test_data).nlargest(5, "Weight_in_lbs")
+        self.assertTrue(self.test_car_processor.top_heaviest_cars().equals(expected))
+
+    def test_cars_by_manufacturer(self):
+        expected = pd.Series([1, 1, 1], index=["Toyota", "Ford", "Honda"])
+        self.assertTrue(self.test_car_processor.cars_by_manufacturer().equals(expected))
+
+    def test_cars_by_year(self):
+        expected = pd.Series([1, 1, 1], index=[2015, 2020, 2022])
+        self.assertTrue(self.test_car_processor.cars_by_year().equals(expected))
+
+    def test_save_to_csv(self):
+        # Save the data to a test CSV file
+        self.test_car_processor.save_to_csv(self.test_csv_file)
+
+        # Load the saved CSV and compare it with the original data
+        df = pd.read_csv(self.test_csv_file)
+        self.assertTrue(df.equals(pd.DataFrame(self.test_data)))
+
+
+if __name__ == "__main__":
+    main()

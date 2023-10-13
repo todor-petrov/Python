@@ -19,7 +19,7 @@ class CarDataProcessor:
             logging.error(f"Error loading JSON data: {str(e)}")
             return []
 
-    def unique_car_count(self):
+    def unique_cars_count(self):
         return len(self.df['Name'].unique())
 
     def average_horsepower(self):
@@ -33,9 +33,9 @@ class CarDataProcessor:
         return self.df.groupby(['Manufacturer']).size()
 
     def cars_by_year(self):
-        self.df['Year'] = pd.to_datetime(self.df['Year'])
-        self.df['YearOfManufacture'] = self.df['Year'].dt.year
-        return self.df.groupby(self.df['YearOfManufacture']).size()
+        return self.df['Year'].value_counts()
+        # self.df['Year'] = pd.to_datetime(self.df['Year'])
+        # return self.df.groupby(self.df['Year'].dt.year).size()
 
     def save_to_csv(self, output_csv):
         self.df.to_csv(output_csv, index=False)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     car_processor = CarDataProcessor(input_json)
 
     # Task 1: Print the number of unique cars
-    unique_car_count = car_processor.unique_car_count()
+    unique_car_count = car_processor.unique_cars_count()
     print(f"Number of unique cars: {unique_car_count}")
 
     # Task 2: Print the average horsepower
