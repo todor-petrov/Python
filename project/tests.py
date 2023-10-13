@@ -49,7 +49,8 @@ class TestCarDataProcessor(TestCase, CarDataProcessor):
             json.dump(self.test_data, f)
 
         # Initialize the CarDataProcessor with test data
-        self.test_car_processor = CarDataProcessor(self.test_json_file)
+        self.df = pd.DataFrame(self.test_data)
+        self.processor = CarDataProcessor(self.test_json_file)
 
     # def tearDown(self):
     #     # Clean up, delete the test JSON file and CSV file
@@ -58,26 +59,28 @@ class TestCarDataProcessor(TestCase, CarDataProcessor):
     #     os.remove(self.test_csv_file)
 
     def test_unique_cars_count(self):
-        self.assertEqual(self.test_car_processor.unique_cars_count(), 3)
+        self.assertEqual(self.processor.unique_cars_count(), 3)
 
     def test_average_horsepower(self):
-        self.assertAlmostEqual(self.test_car_processor.average_horsepower(), 216.66666666666666, places=2)
+        self.assertAlmostEqual(self.processor.average_horsepower(), 216.66666666666666, places=2)
 
     def test_top_heaviest_cars(self):
         expected = pd.DataFrame(self.test_data).nlargest(5, "Weight_in_lbs")
-        self.assertTrue(self.test_car_processor.top_heaviest_cars().equals(expected))
+        self.assertTrue(self.processor.top_heaviest_cars().equals(expected))
 
-    # def test_cars_by_manufacturer(self):
-    #     expected = pd.Series([1, 1, 1], index=['Toyota', 'Ford', 'Honda'])
-    #     self.assertTrue(self.test_car_processor.cars_by_manufacturer().equals(expected))
-    #
+    def test_cars_by_manufacturer(self):
+        self.df['Manufacturer'] = self.df['Name'].str.split(' ').str[0]
+        expected_result = self.df.groupby(['Manufacturer']).size()
+        result = self.processor.cars_by_manufacturer()
+        self.assertTrue(expected_result.equals(result))
+
     # def test_cars_by_year(self):
     #     expected = pd.Series([1, 1, 1], index=[2015, 2020, 2022])
     #     self.assertTrue(self.test_car_processor.cars_by_year().equals(expected))
 
     def test_save_to_csv(self):
         # Save the data to a test CSV file
-        self.test_car_processor.save_to_csv(self.test_csv_file)
+        self.processor.save_to_csv(self.test_csv_file)
 
         # Load the saved CSV and compare it with the original data
         df = pd.read_csv(self.test_csv_file)
