@@ -9,7 +9,8 @@ class CarDataProcessor:
         self.data = self.load_data(json_file)
         self.df = pd.DataFrame(self.data)
 
-    def load_data(self, json_file):
+    @staticmethod
+    def load_data(json_file):
         try:
             with open(json_file, 'r') as file:
                 data = json.load(file)
