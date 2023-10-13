@@ -19,7 +19,7 @@ class CarDataProcessor:
             return []
 
     def unique_car_count(self):
-        return len(self.df)
+        return len(self.df['Name'].unique())
 
     def average_horsepower(self):
         return self.df['Horsepower'].mean()
@@ -28,10 +28,13 @@ class CarDataProcessor:
         return self.df.nlargest(n, 'Weight_in_lbs')
 
     def cars_by_manufacturer(self):
-        return self.df['Name'].value_counts()
+        self.df['Manufacturer'] = self.df['Name'].str.split(' ').str[0]
+        return self.df.groupby(['Manufacturer']).size()
 
     def cars_by_year(self):
-        return self.df['Year'].value_counts()
+        self.df['Year'] = pd.to_datetime(self.df['Year'])
+        self.df['YearOfManufacture'] = self.df['Year'].dt.year
+        return self.df.groupby(self.df['YearOfManufacture']).size()
 
     def save_to_csv(self, output_csv):
         self.df.to_csv(output_csv, index=False)
