@@ -42,13 +42,13 @@ class TestCarDataProcessor(TestCase, CarDataProcessor):
                 "Origin": "Japan",
             },
         ]
-        self.test_json_file = "test_car_data.json"
-        self.test_csv_file = "test_car_data_output.csv"
+        self.test_json_file = 'test_car_data.json'
+        self.test_csv_file = 'test_car_data_output.csv'
 
-        with open(self.test_json_file, "w") as f:
+        with open(self.test_json_file, 'w') as f:
             json.dump(self.test_data, f)
 
-        # Initialize the CarDataAnalyzer with test data
+        # Initialize the CarDataProcessor with test data
         self.test_car_processor = CarDataProcessor(self.test_json_file)
 
     # def tearDown(self):
