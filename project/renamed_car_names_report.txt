@@ -1,0 +1,16 @@
+1. In row 33 chevy c20 has been renamed to chevrolet c20
+2. In row 90 toyouta corona mark ii (sw) has been renamed to toyota corona mark ii (sw)
+3. In row 119 maxda rx3 has been renamed to mazda rx3
+4. In row 169 chevroelt chevelle malibu has been renamed to chevrolet chevelle malibu
+5. In row 192 capri ii has been renamed to mercury capri ii
+6. In row 205 vw rabbit has been renamed to volkswagen rabbit
+7. In row 221 chevy c10 has been renamed to chevrolet c10
+8. In row 301 vw rabbit custom has been renamed to volkswagen rabbit custom
+9. In row 302 maxda glc deluxe has been renamed to mazda glc deluxe
+10. In row 305 mercedes benz 300d has been renamed to mercedes-benz benz 300d
+11. In row 317 vw rabbit has been renamed to volkswagen rabbit
+12. In row 333 vw rabbit c (diesel) has been renamed to volkswagen rabbit c (diesel)
+13. In row 334 vw dasher (diesel) has been renamed to volkswagen dasher (diesel)
+14. In row 340 vokswagen rabbit has been renamed to volkswagen rabbit
+15. In row 403 vw pickup has been renamed to volkswagen pickup
+16. In row 406 chevy s-10 has been renamed to chevrolet s-10

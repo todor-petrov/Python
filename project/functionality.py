@@ -3,6 +3,8 @@ import logging
 import json
 import csv
 
+from cars_names_validator import cars_names_validator
+
 
 class CarDataProcessor:
     def __init__(self, json_file):
@@ -11,12 +13,14 @@ class CarDataProcessor:
 
     @staticmethod
     def load_data(json_file):
+
         try:
             with open(json_file, 'r') as file:
                 data = json.load(file)
-            return data
+                new_data = cars_names_validator(data)
+            return new_data
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            logging.error(f"Error loading JSON data: {str(e)}")
+            logging.error(f'Error loading JSON data: {str(e)}')
             return []
 
     def unique_cars_count(self):
@@ -41,7 +45,7 @@ class CarDataProcessor:
         self.df.to_csv(output_csv, index=False)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     logging.basicConfig(filename='car_data_processor.log', level=logging.INFO)
 
     # Input and output file paths
@@ -52,27 +56,27 @@ if __name__ == "__main__":
 
     # Task 1: Print the number of unique cars
     unique_car_count = car_processor.unique_cars_count()
-    print(f"Number of unique cars: {unique_car_count}")
+    print(f'Number of unique cars: {unique_car_count}')
 
     # Task 2: Print the average horsepower
     avg_horsepower = car_processor.average_horsepower()
-    print(f"Average horsepower of all cars: {avg_horsepower}")
+    print(f'Average horsepower of all cars: {avg_horsepower}')
 
     # Task 3: Print the top 5 heaviest cars
     top_heaviest_cars = car_processor.top_heaviest_cars()
-    print("Top 5 heaviest cars:")
+    print('Top 5 heaviest cars:')
     print(top_heaviest_cars)
 
     # Task 4: Print the number of cars made by each manufacturer
     cars_by_manufacturer = car_processor.cars_by_manufacturer()
-    print("Number of cars by manufacturer:")
+    print('Number of cars by manufacturer:')
     print(cars_by_manufacturer)
 
     # Task 5: Print the number of cars made each year
     cars_by_year = car_processor.cars_by_year()
-    print("Number of cars by year:")
+    print('Number of cars by year:')
     print(cars_by_year)
 
     # Task 6: Save the dataset to a CSV file
     car_processor.save_to_csv(output_csv)
-    print(f"Data saved to {output_csv}")
+    print(f'Data saved to {output_csv}')
