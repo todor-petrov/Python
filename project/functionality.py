@@ -17,6 +17,14 @@ class CarDataProcessor:
         try:
             with open(json_file, 'r') as file:
                 data = json.load(file)
+                """
+                The function cars_names_validator fixes invalid car brands in the current input file (cars.json). 
+                The returned result does not guarantee 100% data consistency, 
+                in this case obvious wrong car brands are corrected manually. 
+                There is also no guarantee of correctness in the car models. 
+                For larger files and depending on the time of their sending, such a solution is not adequate.
+                A better way is to validate the data at the time of entry.
+                """
                 new_data = cars_names_validator(data)
             return new_data
         except (FileNotFoundError, json.JSONDecodeError) as e:
@@ -38,6 +46,7 @@ class CarDataProcessor:
 
     def cars_by_year(self):
         return self.df['Year'].value_counts()
+        # A way to generate just the year, not the whole date.
         # self.df['Year'] = pd.to_datetime(self.df['Year'])
         # return self.df.groupby(self.df['Year'].dt.year).size()
 
