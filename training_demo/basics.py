@@ -77,3 +77,23 @@ total_points = data[country][apparatus]
 print(f'The team of {country} get {total_points:.3f} on {apparatus}.\n'
       f'{percent:.2f}%')
 """
+
+
+"""
+# 03. World Snooker Championship
+stage, ticket_type, tickets, photo = (input(), input(), int(input()), input())
+prices = {'Quarter final': {'Standard':  55.50, 'Premium': 105.20, 'VIP': 118.90},
+          'Semi final':    {'Standard':  75.88, 'Premium': 125.22, 'VIP': 300.40},
+          'Final':         {'Standard': 110.10, 'Premium': 160.66, 'VIP': 400.00}}
+mid_price = prices[stage][ticket_type] * tickets
+total_price = 0
+if mid_price > 4000:
+    total_price += 0.75 * mid_price
+elif mid_price > 2500:
+    total_price += 0.90 * mid_price
+else:
+    total_price = mid_price
+if mid_price <= 4000 and photo == 'Y':
+    total_price += tickets * 40
+print(f'{total_price:.2f}')
+"""
