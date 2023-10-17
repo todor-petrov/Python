@@ -161,3 +161,23 @@ if won_the_leg:
 else:
     print(f'{player} retired after {unsuccessful_shots} unsuccessful shots.')
 """
+
+
+"""
+# 05. Tennis Ranklist
+from math import floor
+
+tournaments, initial_points = int(input()), int(input())
+points = {'W': 2000, 'F': 1200, 'SF': 720}
+wins, total_points = 0, initial_points
+for tournament in range(tournaments):
+    kind_of_tournament = input()
+    total_points += points[kind_of_tournament]
+    if kind_of_tournament == 'W':
+        wins += 1
+average_points = (total_points - initial_points) / tournaments
+tournaments_won_percent = (wins / tournaments) * 100
+print(f'Final points: {total_points}\n'
+      f'Average points: {floor(average_points)}\n'
+      f'{tournaments_won_percent:.2f}%')
+"""
