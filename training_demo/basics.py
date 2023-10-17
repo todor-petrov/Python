@@ -97,3 +97,42 @@ if mid_price <= 4000 and photo == 'Y':
     total_price += tickets * 40
 print(f'{total_price:.2f}')
 """
+
+
+"""
+# 04. Game Number Wars
+first_player, second_player = input(), input()
+first_player_points, second_player_points = 0, 0
+winner, points = '', 0
+number_wars = False
+command = input()
+while command != 'End of game':
+    first_player_card = int(command)
+    second_player_card = int(input())
+    points = abs(first_player_card - second_player_card)
+    if first_player_card > second_player_card:
+        first_player_points += points
+    elif second_player_card > first_player_card:
+        second_player_points += points
+    else:
+        number_wars = True
+        first_player_card = int(input())
+        second_player_card = int(input())
+        difference = abs(first_player_card - second_player_card)
+        if first_player_card > second_player_card:
+            winner = first_player
+            points = first_player_points
+        else:
+            winner = second_player
+            points = second_player_points
+        break
+    command = input()
+if number_wars:
+    print('Number wars!')
+    print(f'{winner} is winner with {points} points')
+else:
+    winner = first_player if first_player_points > second_player_points else second_player
+    points = first_player_points if first_player_points > second_player_points else second_player_points
+    print(f'{first_player} has {first_player_points} points\n'
+          f'{second_player} has {second_player_points} points')
+"""
