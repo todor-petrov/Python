@@ -61,3 +61,19 @@ if player_time <= control_time:
 else:
     print(f'No, Marin failed! He was {(player_time - control_time):.3f} second slower.')
 """
+
+
+"""
+# 03. Gymnastics
+data = {
+        'Russia':   {'ribbon': 18.500, 'hoop': 19.100, 'rope': 18.600},
+        'Bulgaria': {'ribbon': 19.000, 'hoop': 19.300, 'rope': 18.900},
+        'Italy':    {'ribbon': 18.700, 'hoop': 18.900, 'rope': 18.850},
+}
+max_points = 20
+country, apparatus = input(), input()
+percent = (max_points - data[country][apparatus]) / max_points * 100
+total_points = data[country][apparatus]
+print(f'The team of {country} get {total_points:.3f} on {apparatus}.\n'
+      f'{percent:.2f}%')
+"""
