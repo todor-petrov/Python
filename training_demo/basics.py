@@ -136,3 +136,28 @@ else:
     print(f'{first_player} has {first_player_points} points\n'
           f'{second_player} has {second_player_points} points')
 """
+
+
+"""
+# 04. Darts
+initial_points = 301
+points = {'Single': 1, 'Double': 2, 'Triple': 3}
+won_the_leg, successful_shots, unsuccessful_shots = False, 0, 0
+player, command = input(), input()
+while command != 'Retire':
+    score = int(input()) * points[command]
+    if initial_points - score == 0:
+        successful_shots += 1
+        won_the_leg = True
+        break
+    elif initial_points - score > 0:
+        successful_shots += 1
+        initial_points -= score
+    else:
+        unsuccessful_shots += 1
+    command = input()
+if won_the_leg:
+    print(f'{player} won the leg with {successful_shots} shots.')
+else:
+    print(f'{player} retired after {unsuccessful_shots} unsuccessful shots.')
+"""
