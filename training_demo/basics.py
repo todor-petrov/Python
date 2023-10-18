@@ -199,3 +199,31 @@ buyers_percentage = (buyers / visitors) * 100
 print(f'{trainers_percentage:.2f}% - work out\n'
       f'{buyers_percentage:.2f}% - protein')
 """
+
+
+"""
+# High Jump
+target_height = int(input())
+current_height = target_height - 30
+failed_jumps_counter, failed_workout = 0, False
+jumps_counter = 0
+
+jump = int(input())
+while jump != '':
+    jumps_counter += 1
+    if jump > current_height:
+        if current_height >= target_height:
+            break
+        current_height += 5
+        failed_jumps_counter = 0
+    elif jump <= current_height:
+        failed_jumps_counter += 1
+        if failed_jumps_counter == 3:
+            failed_workout = True
+            break
+    jump = int(input())
+if not failed_workout:
+    print(f'Tihomir succeeded, he jumped over {current_height}cm after {jumps_counter} jumps.')
+else:
+    print(f'Tihomir failed at {current_height}cm after {jumps_counter} jumps.')
+"""
