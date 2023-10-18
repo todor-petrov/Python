@@ -181,3 +181,21 @@ print(f'Final points: {total_points}\n'
       f'Average points: {floor(average_points)}\n'
       f'{tournaments_won_percent:.2f}%')
 """
+
+
+"""
+# 05. Fitness Center
+visitors = int(input())
+activities = {'Back': 0, 'Chest': 0, 'Legs': 0, 'Abs': 0, 'Protein shake': 0, 'Protein bar': 0}
+for visitor in range(visitors):
+    activity = input()
+    activities[activity] += 1
+for k, v in activities.items():
+    print(f'{v} - {k.lower()}')
+trainers = sum(activities[k] for k, v in activities.items() if 'Protein' not in k)
+trainers_percentage = (trainers / visitors) * 100
+buyers = sum(activities[k] for k, v in activities.items() if 'Protein' in k)
+buyers_percentage = (buyers / visitors) * 100
+print(f'{trainers_percentage:.2f}% - work out\n'
+      f'{buyers_percentage:.2f}% - protein')
+"""
