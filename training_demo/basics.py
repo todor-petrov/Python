@@ -227,3 +227,28 @@ if not failed_workout:
 else:
     print(f'Tihomir failed at {current_height}cm after {jumps_counter} jumps.')
 """
+
+
+"""
+# 06. Basketball Tournament
+matches_won, matches_lost = 0, 0
+matches_counter = 0
+tournament = input()
+while tournament != 'End of tournaments':
+    matches = int(input())
+    matches_counter += matches
+    for match in range(1, matches + 1):
+        desi_team_points, other_team_points = int(input()), int(input())
+        difference = abs(desi_team_points - other_team_points)
+        if desi_team_points > other_team_points:
+            matches_won += 1
+            print(f'Game {match} of tournament {tournament}: win with {difference} points.')
+        else:
+            matches_lost += 1
+            print(f'Game {match} of tournament {tournament}: lost with {difference} points.')
+    tournament = input()
+matches_won_percent = matches_won / matches_counter * 100
+matches_lost_percent = matches_lost / matches_counter * 100
+print(f'{matches_won_percent:.2f}% matches win\n'
+      f'{matches_lost_percent:.2f}% matches lost')
+"""
