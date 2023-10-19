@@ -22,3 +22,25 @@ else:
         total_price *= 0.90
     print(f'Total price: {total_price:.2f}$')
 """
+
+
+"""
+# 02. The Lift
+people, wagons = int(input()), [int(x) for x in input().split(' ')]
+max_wagon_volume = 4
+for wagon in range(len(wagons)):
+    free_seats = max_wagon_volume - wagons[wagon]
+    if people and free_seats:
+        if people < free_seats:
+            wagons[wagon] += people
+            people = 0
+        else:
+            wagons[wagon] += free_seats
+            people -= free_seats
+free_seats = sum([max_wagon_volume - wagon for wagon in wagons])
+if free_seats > 0:
+    print(f'The lift has empty spots!')
+if people > 0:
+    print(f"There isn\'t enough space! {people} people in a queue!")
+print(f"{' '.join(str(w) for w in wagons)}")
+"""
