@@ -25,3 +25,10 @@ if not soldier_strikes:
     print('The soldier has been defeated.')
 print(f'Total monsters killed: {killed_monsters}')
 """
+
+
+
+# 02. Delivery Boy
+rows, cols = [int(x) for x in input().split()]
+matrix = [list(input()) for x in range(rows)]
+print(matrix)
