@@ -44,3 +44,36 @@ if people > 0:
     print(f"There isn\'t enough space! {people} people in a queue!")
 print(f"{' '.join(str(w) for w in wagons)}")
 """
+
+
+"""
+# 03. Memory Game
+elements = [x for x in input().split()]
+moves, game_won = 0, False
+command = input()
+while command != 'end':
+    moves += 1
+    i, j = [int(x) for x in command.split()]
+    if i == j or not 0 <= i <= len(elements) - 1 or not 0 <= j <= len(elements) - 1:
+        middle = int(len(elements) / 2)
+        first_part = elements[:middle]
+        middle_part = [f'-{moves}a', f'-{moves}a']
+        last_part = elements[middle:]
+        elements = first_part + middle_part + last_part
+        print('Invalid input! Adding additional elements to the board')
+    elif elements[i] == elements[j]:
+        removed_element = elements[i]
+        elements = [x for x in elements if x != removed_element]
+        print(f'Congrats! You have found matching elements - {removed_element}!')
+    else:
+        print('Try again!')
+    if not elements:
+        game_won = True
+        break
+    command = input()
+if game_won:
+    print(f'You have won in {moves} turns!')
+else:
+    print(f"Sorry you lose :(\n"
+          f"{' '.join(x for x in elements)}")
+"""
