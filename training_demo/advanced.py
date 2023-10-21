@@ -26,7 +26,6 @@ if not soldier_strikes:
 print(f'Total monsters killed: {killed_monsters}')
 """
 
-
 """
 # 02. Delivery Boy
 rows, cols = [int(x) for x in input().split()]
@@ -65,4 +64,34 @@ while True:
 
 for start_row in matrix:
     print(''.join(start_row))
+"""
+
+
+"""
+# 03. Pets Hotel
+def accommodate_new_pets(*args):
+    capacity, max_weight = int(args[0]), float(args[1])
+    pets = list([a, w] for (a, w) in args[2:])
+    accommodated_pets, result = {}, []
+    no_more_place = False
+    for i in range(len(pets)):
+        pet_type, pet_weight = pets[i][0], pets[i][1]
+        if capacity == 0:
+            no_more_place = True
+            break
+        else:
+            if pet_weight <= max_weight:
+                if pet_type not in accommodated_pets:
+                    accommodated_pets[pet_type] = 0
+                accommodated_pets[pet_type] += 1
+                capacity -= 1
+    if no_more_place:
+        result.append('You did not manage to accommodate all pets!')
+    else:
+        result.append(f'All pets are accommodated! Available capacity: {capacity}.')
+    result.append('Accommodated pets:')
+    sorted_accommodated_pets = {k: v for k, v in sorted(accommodated_pets.items(), key=lambda x: x[0])}
+    for a, n in sorted_accommodated_pets.items():
+        result.append(f'{a}: {n}')
+    return f'\n'.join(result)
 """
