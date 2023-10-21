@@ -26,6 +26,8 @@ if not soldier_strikes:
 print(f'Total monsters killed: {killed_monsters}')
 """
 
+
+"""
 # 02. Delivery Boy
 rows, cols = [int(x) for x in input().split()]
 matrix = [list(input()) for x in range(rows)]
@@ -63,3 +65,4 @@ while True:
 
 for start_row in matrix:
     print(''.join(start_row))
+"""
