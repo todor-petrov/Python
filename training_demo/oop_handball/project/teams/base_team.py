@@ -25,6 +25,26 @@ class BaseTeam(ABC):
             raise ValueError('Team name cannot be empty!')
         self._name = value
 
+    @property
+    def country(self):
+        return self._country
+
+    @country.setter
+    def country(self, value):
+        if len(value.strip()) < 2:
+            raise ValueError('Team country should be at least 2 symbols long!')
+        self._country = value
+
+    @property
+    def advantage(self):
+        return self._advantage
+
+    @advantage.setter
+    def advantage(self, value):
+        if value <= 0:
+            raise ValueError('Advantage must be greater than zero!')
+        self._advantage = value
+
     def get_statistics(self):
         total_equipment_price = sum([el.price for el in self.equipment])
         protections = [el.protection for el in self.equipment]
