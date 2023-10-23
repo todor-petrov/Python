@@ -1,9 +1,12 @@
 from project.equipment.elbow_pad import ElbowPad
 from project.equipment.knee_pad import KneePad
+from project.teams.indoor_team import IndoorTeam
+from project.teams.outdoor_team import OutdoorTeam
 
 
 class Tournament:
     EQUIPMENT_TYPES = {'ElbowPad': ElbowPad, 'KneePad': KneePad}
+    TEAM_TYPES = {'IndoorTeam': IndoorTeam, 'OutdoorTeam': OutdoorTeam}
 
     def __init__(self, name: str, capacity: int):
         self.name = name
@@ -29,7 +32,13 @@ class Tournament:
         return f'{equipment_type} was successfully added.'
 
     def add_team(self, team_type: str, team_name: str, country: str, advantage: int):
-        ...
+        if team_type not in Tournament.TEAM_TYPES:
+            raise Exception('Invalid team type!')
+        if len(self.teams) >= self.capacity:
+            return 'Not enough tournament capacity.'
+        team = Tournament.TEAM_TYPES[team_type](team_name, country, advantage)
+        self.teams.append(team)
+        return f'{team_type} was successfully added.'
 
     def sell_equipment(self, equipment_type: str, team_name: str):
         ...
