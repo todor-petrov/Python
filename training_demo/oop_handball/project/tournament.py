@@ -41,17 +41,19 @@ class Tournament:
         return f'{team_type} was successfully added.'
 
     def sell_equipment(self, equipment_type: str, team_name: str):
-        equipment = [e for e in self.equipment if e.TYPE_ == equipment_type][-1]
-        team = [t for t in self.teams if t.name == team_name][0]
+        equipments = [e for e in self.equipment if e.TYPE_ == equipment_type]
+        equipment = equipments[-1] if equipments else None
+        teams = [team for team in self.teams if team.name == team_name]
+        team = teams[0] if teams else None
         if team.budget < equipment.price:
-            return 'Budget is not enough!'
+            raise Exception('Budget is not enough!')
         self.equipment.remove(equipment)
         team.equipment.append(equipment)
         team.budget -= equipment.price
         return f'Successfully sold {equipment_type} to {team_name}.'
 
     def remove_team(self, team_name: str):
-        team_search = [t for t in self.teams if t.name == team_name]
+        team_search = [team for team in self.teams if team.name == team_name]
         if not team_search:
             raise Exception('No such team!')
         team = team_search[0]
