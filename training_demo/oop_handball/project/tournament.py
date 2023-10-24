@@ -61,7 +61,8 @@ class Tournament:
         return f'Successfully removed {team_name}.'
 
     def increase_equipment_price(self, equipment_type: str):
-        ...
+        increased_equipments = len([e.increase_price() for e in self.equipment if e.TYPE_ == equipment_type])
+        return f'Successfully changed {increased_equipments}pcs of equipment.'
 
     def play(self, team_name1: str, team_name2: str):
         ...
