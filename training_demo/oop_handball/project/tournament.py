@@ -65,8 +65,8 @@ class Tournament:
         return f'Successfully changed {increased_equipments}pcs of equipment.'
 
     def play(self, team_name1: str, team_name2: str):
-        team_1 = [t for t in self.teams if t.name == team_name1][0]
-        team_2 = [t for t in self.teams if t.name == team_name2][0]
+        team_1 = [team for team in self.teams if team.name == team_name1][0]
+        team_2 = [team for team in self.teams if team.name == team_name2][0]
         if not team_1.TYPE_ == team_2.TYPE_:
             raise Exception('Game cannot start! Team types mismatch!')
         team_1_points = team_1.advantage + sum([e.protection for e in team_1.equipment])
@@ -78,5 +78,29 @@ class Tournament:
         return f'The winner is {winner.name}.'
 
     def get_statistics(self):
-        ...
+        sorted_teams = sorted(self.teams, key=lambda x: -x.wins)
+        result = [f'Tournament: {self.name}\nNumber of Teams: {len(self.teams)}\nTeams:']
+        result.extend([team.get_statistics() for team in sorted_teams])
+        return '\n'.join(result)
 
+
+t = Tournament('SoftUniada2023', 2)
+
+print(t.add_equipment('KneePad'))
+print(t.add_equipment('ElbowPad'))
+
+print(t.add_team('OutdoorTeam', 'Levski', 'BG', 250))
+print(t.add_team('OutdoorTeam', 'Spartak', 'BG', 250))
+print(t.add_team('IndoorTeam', 'Dobrich', 'BG', 280))
+
+print(t.sell_equipment('KneePad', 'Spartak'))
+
+print(t.remove_team('Levski'))
+print(t.add_team('OutdoorTeam', 'Lokomotiv', 'BG', 250))
+
+print(t.increase_equipment_price('ElbowPad'))
+print(t.increase_equipment_price('KneePad'))
+
+print(t.play('Lokomotiv', 'Spartak'))
+
+print(t.get_statistics())
