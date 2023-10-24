@@ -65,7 +65,17 @@ class Tournament:
         return f'Successfully changed {increased_equipments}pcs of equipment.'
 
     def play(self, team_name1: str, team_name2: str):
-        ...
+        team_1 = [t for t in self.teams if t.name == team_name1][0]
+        team_2 = [t for t in self.teams if t.name == team_name2][0]
+        if not team_1.TYPE_ == team_2.TYPE_:
+            raise Exception('Game cannot start! Team types mismatch!')
+        team_1_points = team_1.advantage + sum([e.protection for e in team_1.equipment])
+        team_2_points = team_2.advantage + sum([e.protection for e in team_2.equipment])
+        if team_1_points == team_2_points:
+            return 'No winner in this game.'
+        winner = team_1 if team_1_points > team_2_points else team_2
+        winner.win()
+        return f'The winner is {winner.name}.'
 
     def get_statistics(self):
         ...
