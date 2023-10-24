@@ -51,7 +51,14 @@ class Tournament:
         return f'Successfully sold {equipment_type} to {team_name}.'
 
     def remove_team(self, team_name: str):
-        ...
+        team_search = [t for t in self.teams if t.name == team_name]
+        if not team_search:
+            raise Exception('No such team!')
+        team = team_search[0]
+        if team.wins != 0:
+            raise Exception(f'The team has {team.wins} wins! Removal is impossible!')
+        self.teams.remove(team)
+        return f'Successfully removed {team_name}.'
 
     def increase_equipment_price(self, equipment_type: str):
         ...
