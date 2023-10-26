@@ -22,6 +22,11 @@ class TripTester(TestCase):
         self.trip.travelers = 1
         self.assertTrue(self.trip.is_family, False)
 
+    def test_book_a_trip(self):
+        destination = 'United Kingdom'
+        message = 'This destination is not in our offers, please choose a new one!'
+        self.assertEqual(message, self.trip.book_a_trip(destination))
+
 
 if 'name' == '__main__':
     main()
