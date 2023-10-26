@@ -12,6 +12,11 @@ class TripTester(TestCase):
         self.assertEqual(self.trip.is_family, True)
         self.assertEqual(self.trip.booked_destinations_paid_amounts, {})
 
+    def test_travellers_number_is_more_than_zero(self):
+        with self.assertRaises(ValueError) as ve:
+            self.trip.travelers = 0
+        self.assertEqual('At least one traveler is required!', str(ve.exception))
+
 
 if 'name' == '__main__':
     main()
