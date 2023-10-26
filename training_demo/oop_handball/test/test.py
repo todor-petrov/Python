@@ -17,6 +17,11 @@ class TripTester(TestCase):
             self.trip.travelers = 0
         self.assertEqual('At least one traveler is required!', str(ve.exception))
 
+    def test_is_family_is_correct(self):
+        self.assertTrue(self.trip.is_family, True)
+        self.trip.travelers = 1
+        self.assertTrue(self.trip.is_family, False)
+
 
 if 'name' == '__main__':
     main()
