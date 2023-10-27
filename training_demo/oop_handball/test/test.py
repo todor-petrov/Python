@@ -27,6 +27,10 @@ class TripTester(TestCase):
         message = 'This destination is not in our offers, please choose a new one!'
         self.assertEqual(message, self.trip.book_a_trip(destination))
 
+    def test_required_price(self):
+        self.trip.book_a_trip('Bulgaria')
+        self.assertEqual(self.trip.booked_destinations_paid_amounts, {'Bulgaria': 1350.0})
+
 
 if 'name' == '__main__':
     main()
