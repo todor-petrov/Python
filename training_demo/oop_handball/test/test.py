@@ -28,9 +28,10 @@ class TripTester(TestCase):
         self.assertEqual(message, self.trip.book_a_trip(destination))
 
     def test_book_trip_family_discount_happy_case(self):
-        self.trip.book_a_trip('Bulgaria')
+        result = self.trip.book_a_trip('Bulgaria')
         self.assertEqual(self.trip.booked_destinations_paid_amounts, {'Bulgaria': 1350.0})
         self.assertEqual(self.trip.budget, 8650.0)
+        self.assertEqual(result, 'Successfully booked destination Bulgaria! Your budget left is 8650.00')
 
 
 if 'name' == '__main__':
