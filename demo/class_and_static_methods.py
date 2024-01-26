@@ -55,7 +55,6 @@ class Shop:
         return f'{self.name} of type {self.type} with capacity {self.capacity}'
 """
 
-
 # 03. Integer
 """
 class Integer:
@@ -87,4 +86,43 @@ class Integer:
         if not isinstance(value, str):
             return 'wrong type'
         return Integer(int(value))
+"""
+
+
+# 01. Photo Album
+"""
+class PhotoAlbum:
+
+    MAX_PHOTOS_ON_PAGE = 4
+
+    def __init__(self, pages: int):
+        self.pages = pages
+        self.photos = [[] for _ in range(pages)]
+
+    @classmethod
+    def from_photos_count(cls, photos_count: int):
+        album_pages = photos_count // PhotoAlbum.MAX_PHOTOS_ON_PAGE
+        if photos_count % PhotoAlbum.MAX_PHOTOS_ON_PAGE != 0:
+            album_pages += 1
+        return cls(album_pages)
+
+    def add_photo(self, label: str):
+        if sum([len(x) for x in self.photos]) == PhotoAlbum.MAX_PHOTOS_ON_PAGE * self.pages:
+            return 'No more free slots'
+        for page in self.photos:
+            if len(page) < PhotoAlbum.MAX_PHOTOS_ON_PAGE:
+                page.append(label)
+                page_number = self.photos.index(page) + 1
+                slot_number = self.photos[page_number - 1].index(label) + 1
+                return f'{label} photo added successfully on page {page_number} slot {slot_number}'
+
+    def display(self):
+        my_album = ['-----------']
+        for page in range(self.pages):
+            if len(self.photos[page]) > 0:
+                my_album.append(' '.join('[]' for x in self.photos[page]))
+                my_album.append('-----------')
+            else:
+                my_album.append('\n' + '-----------')
+        return '\n'.join(my_album)
 """
