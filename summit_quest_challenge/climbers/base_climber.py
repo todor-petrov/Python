@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
-from project.peaks.base_peak import BasePeak
+from peaks.base_peak import BasePeak
 
 
 class BaseClimber(ABC):
 
-    CLIMBER_STRENGTH_INCREASING = 15
+    STRENGTH_INCREASING = 15
 
     def __init__(self, name: str, strength: float):
         self.name = name
@@ -42,10 +42,10 @@ class BaseClimber(ABC):
         ...
 
     def rest(self):
-        self.strength += BaseClimber.CLIMBER_STRENGTH_INCREASING
+        self.strength += BaseClimber.STRENGTH_INCREASING
 
     def __str__(self):
         return (f"{self.__class__.__name__}: "
                 f"/// Climber name: {self.name} * "
                 f"Left strength: {self.strength:.1f} * "
-                f"Conquered peaks: {', '.join(self.conquered_peaks)} ///")
+                f"Conquered peaks: {', '.join(sorted(self.conquered_peaks))} ///")
