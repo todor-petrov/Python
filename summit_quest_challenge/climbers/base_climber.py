@@ -47,5 +47,5 @@ class BaseClimber(ABC):
     def __str__(self):
         return (f"{self.__class__.__name__}: "
                 f"/// Climber name: {self.name} * "
-                f"Left strength: {self.strength} * "
+                f"Left strength: {self.strength:.1f} * "
                 f"Conquered peaks: {', '.join(self.conquered_peaks)} ///")

@@ -29,5 +29,9 @@ class BasePeak(ABC):
         self.__elevation = value
 
     @abstractmethod
+    def get_recommended_gear(self):
+        ...
+
+    @abstractmethod
     def calculate_difficulty_level(self):
         ...
