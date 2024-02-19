@@ -1,4 +1,4 @@
-from project.loans.base_loan import BaseLoan
+from loans.base_loan import BaseLoan
 
 
 class MortgageLoan(BaseLoan):

@@ -1,4 +1,4 @@
-from project.clients.base_client import BaseClient
+from clients.base_client import BaseClient
 
 
 class Adult(BaseClient):
