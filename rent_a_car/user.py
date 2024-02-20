@@ -1,18 +1,15 @@
-from project import validator
-
-
 class User:
 
     INCREASING_RATING = 0.5
-    MAX_RATING = 10.0
+    MAX_RATING = 10
     DECREASING_RATING = 2.0
-    MIN_RATING = 0.0
+    MIN_RATING = 0
 
     def __init__(self, first_name: str, last_name: str, driving_license_number: str):
         self.first_name = first_name
         self.last_name = last_name
         self.driving_license_number = driving_license_number
-        self.rating = 0.0
+        self.rating = User.MIN_RATING
         self.is_blocked = False
 
     @property
@@ -51,7 +48,7 @@ class User:
 
     @rating.setter
     def rating(self, value):
-        if value < 0:
+        if value < User.MIN_RATING:
             raise ValueError('Users rating cannot be negative!')
         self.__rating = value
 
@@ -61,10 +58,11 @@ class User:
             self.rating = User.MAX_RATING
 
     def decrease_rating(self):
-        self.rating -= User.DECREASING_RATING
-        if User.MIN_RATING < self.rating:
+        if self.rating - User.DECREASING_RATING < User.MIN_RATING:
             self.rating = User.MIN_RATING
             self.is_blocked = True
+        else:
+            self.rating -= User.DECREASING_RATING
 
     def __str__(self):
         return (f'{self.first_name} {self.last_name} '

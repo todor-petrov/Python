@@ -39,7 +39,7 @@ class BaseVehicle(ABC):
 
     @license_plate_number.setter
     def license_plate_number(self, value):
-        if value.strip():
+        if not value.strip():
             raise ValueError('License plate number is required!')
         self.__license_plate_number = value
 
@@ -54,7 +54,7 @@ class BaseVehicle(ABC):
         self.is_damaged = not self.is_damaged
 
     def __str__(self):
-        status = 'OK' if not self.is_damaged else 'Damaged'
+        status = 'Damaged' if self.is_damaged else 'OK'
         return (f'{self.brand} {self.model} '
                 f'License plate: {self.license_plate_number} '
                 f'Battery: {self.battery_level}% '
