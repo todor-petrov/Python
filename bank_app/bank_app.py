@@ -47,3 +47,45 @@ class BankApp:
         client_name = client.name
         self.clients.remove(client)
         return f'Successfully removed {client_name} with ID {client_id}.'
+
+    def increase_loan_interest(self, loan_type: str):
+        loans = [loan for loan in self.loans if loan.__class__.__name__ == loan_type]
+        for loan in loans:
+            loan.increase_interest_rate()
+        return f'Successfully changed {len(loans)} loans.'
+
+    def increase_clients_interest(self, min_rate: float):
+        clients = [c for c in self.clients if c.interest < min_rate]
+        for client in clients:
+            client.increase_clients_interest()
+        return f'Number of clients affected: {len(clients)}.'
+
+    def get_statistics(self):
+
+        total_clients_income = sum([c.income for c in self.clients])
+        loans_count_granted_to_clients = sum([len(c.loans) for c in self.clients])
+        granted_sum = 0
+        for client in self.clients:
+            for loan in client.loans:
+                granted_sum += loan.amount
+
+        loans_count_not_granted = len(self.loans)
+        not_granted_sum = sum([a.amount for a in self.loans])
+        avg_client_interest_rate = 0
+        if self.clients:
+            avg_client_interest_rate = sum([c.interest for c in self.clients]) / len(self.clients)
+
+        bank_statistics = [f'Active Clients: {len(self.clients)}',
+                           f'Total Income: {total_clients_income:.2f}',
+                           f'Granted Loans: {loans_count_granted_to_clients}, Total Sum: {granted_sum:.2f}',
+                           f'Available Loans: {loans_count_not_granted}, Total Sum: {not_granted_sum:.2f}',
+                           f'Average Client Interest Rate: {avg_client_interest_rate:.2f}']
+        return '\n'.join(bank_statistics)
+
+    def find_client_by_id(self, client_id):
+        client = [c for c in self.clients if c.client_id == client_id]
+        return client[0] if client else None
+
+    def find_loan_by_loan_type(self, loan_type):
+        loan = [loan for loan in self.loans if loan.__class__.__name__ == loan_type]
+        return loan[0] if loan else None
