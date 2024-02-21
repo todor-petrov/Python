@@ -1,3 +1,4 @@
+from project.route import Route
 from project.user import User
 from project.vehicles.cargo_van import CargoVan
 from project.vehicles.passenger_car import PassengerCar
@@ -30,7 +31,16 @@ class ManagingApp:
         return f'{brand} {model} was successfully uploaded with LPN-{license_plate_number}.'
 
     def allow_route(self, start_point: str, end_point: str, length: float):
-        ...
+        route_id = len(self.routes) + 1
+        route = self.check_route(start_point, end_point, length)
+        if route == 'Route already exists!':
+            return f'{start_point}/{end_point} - {length} km had already been added to our platform.'
+        elif route == 'Shorter route exists!':
+            return f'{start_point}/{end_point} shorter route had already been added to our platform.'
+        else:
+            new_route = Route(start_point, end_point, length, route_id)
+            self.routes.append(new_route)
+            return f'{start_point}/{end_point} - {length} km is unlocked and available to use.'
 
     def make_trip(self, driving_license_number: str, license_plate_number: str, route_id: int, is_accident_happened: bool):
         ...
@@ -48,3 +58,15 @@ class ManagingApp:
     def find_vehicle_by_license_plate_number(self, license_plate_number):
         vehicle = [v for v in self.vehicles if v.license_plate_number == license_plate_number]
         return vehicle[0] if vehicle else None
+
+    def check_route(self, start_point, end_point, length):
+        for r in self.routes:
+            if r.start_point == start_point and r.end_point == end_point:
+                if r.length == length:
+                    return 'Route already exists!'
+                elif r.length < length:
+                    return 'Shorter route exists!'
+                elif r.length > length:
+                    r.is_locked = True
+                    return 'Route have to be locked!'
+        return
