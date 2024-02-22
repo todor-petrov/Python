@@ -90,7 +90,13 @@ class ManagingApp:
         return f'{len(vehicles_for_repair)} vehicles were successfully repaired!'
 
     def users_report(self):
-        ...
+
+        report = ['*** E-Drive-Rent ***']
+
+        for user in sorted(self.users, key=lambda u: -u.rating):
+            report.append(str(user))
+
+        return '\n'.join(report)
 
     def find_user_by_driving_license(self, driving_license_number):
 
@@ -101,7 +107,6 @@ class ManagingApp:
     def find_vehicle_by_license_plate_number(self, license_plate_number):
 
         vehicle = [v for v in self.vehicles if v.license_plate_number == license_plate_number]
-
         return vehicle[0] if vehicle else None
 
     def check_route(self, start_point, end_point, length):
