@@ -1,7 +1,7 @@
-from project.route import Route
-from project.user import User
-from project.vehicles.cargo_van import CargoVan
-from project.vehicles.passenger_car import PassengerCar
+from rent_a_car.route import Route
+from rent_a_car.user import User
+from rent_a_car.vehicles.cargo_van import CargoVan
+from rent_a_car.vehicles.passenger_car import PassengerCar
 
 
 class ManagingApp:
@@ -43,7 +43,22 @@ class ManagingApp:
             return f'{start_point}/{end_point} - {length} km is unlocked and available to use.'
 
     def make_trip(self, driving_license_number: str, license_plate_number: str, route_id: int, is_accident_happened: bool):
-        ...
+        user = self.find_user_by_driving_license(driving_license_number)
+        vehicle = self.find_vehicle_by_license_plate_number(license_plate_number)
+        route = [r for r in self.routes if r.route_id == route_id][0]
+        if user.is_blocked:
+            return f'User {driving_license_number} is blocked in the platform! This trip is not allowed.'
+        if vehicle.is_damaged:
+            return f'Vehicle {license_plate_number} is damaged! This trip is not allowed.'
+        if route.is_locked:
+            return f'Route {route_id} is locked! This trip is not allowed.'
+        vehicle.drive(route.length)
+        if is_accident_happened:
+            vehicle.is_damaged = True
+            user.decrease_rating()
+        else:
+            user.increase_rating()
+        return str(vehicle)
 
     def repair_vehicles(self, count: int):
         ...

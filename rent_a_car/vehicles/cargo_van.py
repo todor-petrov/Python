@@ -1,4 +1,4 @@
-from project.vehicles.base_vehicle import BaseVehicle
+from rent_a_car.vehicles.base_vehicle import BaseVehicle
 
 
 class CargoVan(BaseVehicle):
