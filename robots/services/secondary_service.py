@@ -1,4 +1,4 @@
-from project.services.base_service import BaseService
+from robots.services.base_service import BaseService
 
 
 class SecondaryService(BaseService):
@@ -11,6 +11,8 @@ class SecondaryService(BaseService):
     def details(self):
         service_details = [f'{self.name} Secondary Service:', 'Robots: ']
         if self.robots:
-            service_details[0] += ' '.join(r.name for r in self.robots)
+            service_details[1] += ' '.join([r.name for r in self.robots])
         else:
-            service_details[0] += 'none'
+            service_details[1] += 'none'
+
+        return '\n'.join(service_details)

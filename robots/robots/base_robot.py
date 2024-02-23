@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseRobot(ABC):
 
     def __init__(self, name: str, kind: str, price: float, weight: int):
