@@ -21,3 +21,26 @@ class RobotsManagingApp:
         service = RobotsManagingApp.SERVICES[service_type](name)
         self.services.append(service)
         return f'{service_type} is successfully added.'
+
+    def add_robot(self, robot_type: str, name: str, kind: str, price: float):
+
+        if robot_type not in RobotsManagingApp.ROBOTS:
+            raise Exception('Invalid robot type!')
+
+        robot = RobotsManagingApp.ROBOTS[robot_type](name, kind, price)
+        self.robots.append(robot)
+        return f'{robot_type} is successfully added.'
+
+    def add_robot_to_service(self, robot_name: str, service_name: str):
+        robot = self._find_robot_by_name(robot_name)
+        service = self._find_service_by_name(service_name)
+
+        if not RobotsManagingApp.SERVICES_ROBOTS[service.__class__.__name__] == robot.__class__.__name__:
+            return 'Unsuitable service.'
+
+        if service.capacity == len(service.robots):
+            raise Exception('Not enough capacity for this robot!')
+
+        self.robots.remove(robot)
+        service.robots.append(robot)
+        return f'Successfully added {robot_name} to {service_name}.'
