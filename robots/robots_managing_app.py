@@ -65,3 +65,23 @@ class RobotsManagingApp:
 
         return f'Robots fed: {len(service.robots)}.'
 
+    def service_price(self, service_name: str):
+        service = self._find_service_by_name(service_name)
+        robots_price = sum([r.price for r in service.robots])
+        return f'The value of service {service_name} is {robots_price:.2f}.'
+
+    def __str__(self):
+
+        data = []
+        for service in self.services:
+            data.append(service.details())
+
+        return '\n'.join(data)
+
+    def _find_robot_by_name(self, robot_name):
+        robot = [r for r in self.robots if r.name == robot_name]
+        return robot[0] if robot else None
+
+    def _find_service_by_name(self, service_name):
+        service = [s for s in self.services if s.name == service_name]
+        return service[0] if service else None
