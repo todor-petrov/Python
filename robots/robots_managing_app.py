@@ -44,3 +44,24 @@ class RobotsManagingApp:
         self.robots.remove(robot)
         service.robots.append(robot)
         return f'Successfully added {robot_name} to {service_name}.'
+
+    def remove_robot_from_service(self, robot_name: str, service_name: str):
+
+        service = self._find_service_by_name(service_name)
+        robot = [r for r in service.robots if r.name == robot_name]
+
+        if not robot:
+            raise Exception('No such robot in this service!')
+
+        service.robots.remove(robot[0])
+        self.robots.append(robot[0])
+        return f'Successfully removed {robot_name} from {service_name}.'
+
+    def feed_all_robots_from_service(self, service_name: str):
+        service = self._find_service_by_name(service_name)
+
+        for robot in service.robots:
+            robot.eating()
+
+        return f'Robots fed: {len(service.robots)}.'
+
